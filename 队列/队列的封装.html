@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //队列的类
+        function Queue(){
+            this.items = []
+            //队列是先进先出，前端只准取出，后端只准进入
+            //队列的进入
+            Queue.prototype.enter = function(element){
+                this.items[this.items.length] = element
+            }
+            //队列的取出
+            Queue.prototype.pop = function(){
+                return this.items.shift()
+            }
+            //判断队列是否为空
+            Queue.prototype.isEmpty = function(){
+                return !Boolean(this.items.length)
+            }
+            //查看队首值
+            Queue.prototype.front = function(){
+                return this.items[0]
+            }
+        }
+
+        var queue = new Queue()
+        queue.enter(12)
+        queue.enter(11)
+        queue.enter(10)
+        queue.enter(9)
+        alert(queue.items)
+        alert(queue.pop())
+        alert(queue.items)
+        alert(queue.front())
+        queue.enter(9)
+        queue.enter(9)
+        queue.enter(9)
+        alert(queue.items)        
+    </script>
+</body>
+</html>

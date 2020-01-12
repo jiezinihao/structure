@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>栈的封装</title>
+</head>
+<body>
+    <script>
+        //栈类
+        function Stack(){
+            this.items = []
+            //将数据压入栈
+            Stack.prototype.push = function(element){
+                this.items.push(element)
+            }
+            //取出栈顶元素
+            Stack.prototype.pop = function(){
+                return this.items.pop()
+            }
+            //查看栈顶元素
+            Stack.prototype.peek = function(){
+                return this.items[this.items.length - 1]
+            }
+            //判断栈是否为空
+            Stack.prototype.isEmpty = function(){
+                return !Boolean(this.items.length)
+            }
+            //查看栈的大小
+            Stack.prototype.size = function(){
+                return this.items.length
+            }
+            //将栈内元素转化为字符串
+            Stack.prototype.toString = function(){
+                let stackString = ''
+                for(i = 0;i<this.items.length;i++){
+                    stackString += this.items[i] + ','
+                }
+                return stackString
+            }
+
+        }
+
+        var stu = new Stack()
+        // stu.push(50)
+        // stu.push(40)
+        // stu.push(30)
+        // stu.push(20)
+
+        // alert(stu.items)
+        // alert(stu.pop())
+        // alert(stu.items)
+        // alert(stu.peek())
+        
+        // alert(stu.items)
+        alert(stu.isEmpty())
+        // alert(stu.size())
+        // alert(stu.toString())
+    </script>
+</body>
+</html>
