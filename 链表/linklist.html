@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //初始化链表类
+        function LinkedList(){
+            //链表的基本认知head指向下一个节点，如果链表为空则指向null，链表最后一项的next指向null
+            //初始化head,默认为null
+            this.head = null
+
+            //初始化链表的长度  默认为0
+            this.length = 0
+
+            //初始化节点的类
+            function Node(data){
+                this.data = data
+
+                //节点的指向默认为空
+                this.next = null
+            }
+
+            //链表的方法
+            //append向链表最后一项添加项，无返回值
+            LinkedList.prototype.append = function(data){
+
+                //使data变成node类
+                let node = new Node(data)
+
+                if(this.length == 0){
+                    //链表为空下，使head指向node
+                    this.head = node
+                }else{
+                    //链表不为空，先取得链表最后一项，使其next指向node
+                    //先取得第一项 current:目标
+                    let current = this.head
+                    while(current.next){
+                        current = current.next
+                    }
+                    //此时current指向的是最后一项的next,将next指向node
+                    current.next = node
+                }
+                this.length += 1
+            }
+
+            //get获取对应位置的元素,传入position,返回元素的节点node
+            LinkedList.prototype.get = function(position){
+                //两种种情况，position = 0、其他
+                if(position<0||position>this.length) return false
+                
+                    let current = this.head
+                    for(i in position){
+                        current = current.next
+                    }
+                    return current
+            }
+
+            //insert向列表的特定位置插入一个新的项,此方法接受两个参数，position和data，返回boolean
+            LinkedList.prototype.insert = function(position,data){
+                //两种种情况，position = 0、其他
+                if(position<0||position>this.length) return false
+
+                //使data变成node类
+                let node = new Node(data)
+
+
+                //position = 0
+                if(position == 0 ){
+                    this.head = node
+                }else{
+                    //position != 0
+                    //向找到待插入位置的项，使其next指向此node，使此node中next指向其next
+                    let current = this.get(position)
+                    let currentnext = current.next
+                    //此处要先复制nede.next
+                    node.next = currentnext
+                    current.next = node
+
+                }
+                this.length += 1
+                return true
+            }
+
+            //toString转化链表,返回链表字符串值
+            LinkedList.prototype.toString = function(){
+                let current = this.head
+                let linkListString = ""
+                if(this.length ==0 )return linkListString
+                while(current){
+                    linkListString += current.data + ","
+                    current = current.next
+                }
+                return linkListString
+            }
+
+            
+        }
+
+        //测试,哇，这部分还必须要有toString()方法
+        var linkedlist = new LinkedList()
+        linkedlist.append('abc')
+        alert(linkedlist.toString())
+        linkedlist.append('dfg')
+        linkedlist.append('hij')
+        console.log(linkedlist.get(2))
+        alert(linkedlist.toString())
+        linkedlist.insert(2,'insert')
+        alert(linkedlist.toString())
+        console.dir(linkedlist)
+    </script>
+</body>
+</html>
