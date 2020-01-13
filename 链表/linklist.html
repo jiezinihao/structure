@@ -54,7 +54,7 @@
                 if(position<0||position>this.length) return false
                 
                     let current = this.head
-                    for(i in position){
+                    for(i=1;i<position;i++){
                         current = current.next
                     }
                     return current
@@ -98,20 +98,70 @@
                 return linkListString
             }
 
+            //indexOf:(element)返回元素在列表中的索引，如果没有则返回-1
+            LinkedList.prototype.indexOf = function(element){
+                let current = this.head
+
+                //while循环里加一个判断，如果current找到了，就返回这个索引值
+                let index = 0
+                while(current.data != element){
+                    index += 1
+                    if(index > this.length){
+                        return "没找到"
+                    }else{
+                        current = current.next
+                    }
+
+                }
+                return element+ "索引值是：" + index
+
+            }
+
+            //update(position,element):修改特定位置的元素 无返回值
+            LinkedList.prototype.update = function(position,element){
+                let current = this.get(position)
+                current.data = element
+            }
+
+            //从链表中删除一项
+            LinkedList.prototype.removeAt = function(position){
+                let current = this.get(position-1)
+                let newcurrent = this.get(position)
+                if(current){
+                    return console.error();
+                    
+                }
+                if(position == this.length){
+                    newcurrent = null
+                }else{
+                current.next = newcurrent.next
+                newcurrent = null
+                }
+                this.length -= 1
+            }
+
+            //size
+            LinkedList.prototype.size = function(){
+                return this.length
+            }
             
         }
 
         //测试,哇，这部分还必须要有toString()方法
         var linkedlist = new LinkedList()
         linkedlist.append('abc')
-        alert(linkedlist.toString())
+        // alert(linkedlist.toString())
         linkedlist.append('dfg')
         linkedlist.append('hij')
-        console.log(linkedlist.get(2))
+        // alert(linkedlist.indexOf('abc'))
+        linkedlist.removeAt(0)
         alert(linkedlist.toString())
-        linkedlist.insert(2,'insert')
-        alert(linkedlist.toString())
-        console.dir(linkedlist)
+        // console.log(linkedlist.get(2))
+        // alert(linkedlist.toString())
+        // linkedlist.insert(3,'insert')
+        // alert(linkedlist.toString())
+        // console.dir(linkedlist)
+        alert(linkedlist.size())
     </script>
 </body>
 </html>
